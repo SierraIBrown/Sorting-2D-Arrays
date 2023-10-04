@@ -55,5 +55,32 @@ public class CompareSorters{
   }
 
   public static void randPoint(int numPts, Random rand, PointScanner[] scanners){
-    
-  }
+    scanners[0] = new PointScanner(generateRandomPoints(numPts, rand), Algorithm.SelectionSort);
+    scanners[1] = new PointScanner(generateRandomPoints(numPts, rand), Algorithm.InsertionSort);
+		scanners[2] = new PointScanner(generateRandomPoints(numPts, rand), Algorithm.MergeSort);
+		scanners[3] = new PointScanner(generateRandomPoints(numPts, rand), Algorithm.QuickSort);
+		
+		System.out.println("Algorithm size time (ns): ");
+		System.out.println("-----------------------------------");
+		for(int i = 0; i < 4; i++) {
+			scanners[i].scan();
+			System.out.println(scanners[i].stats());
+		}
+		System.out.println("-----------------------------------");
+	}
+
+  public static void filePoint(String file, PointScanner[] scanners) throws FileNotFoundException{
+		scanners[0] = new PointScanner(file, Algorithm.SelectionSort);
+		scanners[1] = new PointScanner(file, Algorithm.InsertionSort);
+		scanners[2] = new PointScanner(file, Algorithm.MergeSort);
+		scanners[3] = new PointScanner(file, Algorithm.QuickSort);
+		
+		System.out.println("Algorithm size time (ns): ");
+		System.out.println("-----------------------------------");
+		for(int i = 0; i < 4; i++) {
+			scanners[i].scan();
+			System.out.println(scanners[i].stats());
+		}
+		System.out.println("-----------------------------------");
+	}
+}
